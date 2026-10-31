@@ -21,7 +21,7 @@ Classe: `CoberturaArestasTest.java`. Registre os resultados de sua execução is
 
 <!-- Insira o grafo e descreva as convenções de entrada, saída, curto-circuito e saídas por exceção. -->
 
-Válidação dos argumentos:
+Validação dos argumentos:
 ```mermaid
 flowchart TD
     IN([Entrada]) --> B1
