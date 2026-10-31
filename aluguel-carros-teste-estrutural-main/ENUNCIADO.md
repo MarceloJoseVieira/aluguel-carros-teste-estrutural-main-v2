@@ -30,7 +30,7 @@ BigDecimal calcularCustoLocacao(
     int horasAtraso,
     TipoSeguro seguro,
     boolean possuiAtrasoAnterior
-)
+);
 ```
 
 **As regras de negócio e de validação permanecem as mesmas da primeira unidade.** Elas são reproduzidas nas seções 3 e 4 para consulta; a mudança nesta unidade está nos critérios de teste e nas evidências exigidas.
