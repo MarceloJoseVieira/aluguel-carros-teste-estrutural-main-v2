@@ -21,7 +21,139 @@ Classe: `CoberturaArestasTest.java`. Registre os resultados de sua execução is
 
 <!-- Insira o grafo e descreva as convenções de entrada, saída, curto-circuito e saídas por exceção. -->
 
-A preencher.
+Válidação dos argumentos:
+```mermaid
+flowchart TD
+    IN([Entrada]) --> B1
+
+    B1{"1<br/>categoria == null OU<br/>nivelCliente == null OU<br/>seguro == null?"}
+    B1 -- V --> B2["2<br/>Lançar NullPointerException"]
+    B1 -- F --> B3{"3<br/>numeroDiarias <= 0?"}
+
+    B3 -- V --> B4["4<br/>Lançar IllegalArgumentException"]
+    B3 -- F --> B5{"5<br/>quilometrosRodados < 0?"}
+
+    B5 -- V --> B6["6<br/>Lançar IllegalArgumentException"]
+    B5 -- F --> B7{"7<br/>horasAtraso < 0?"}
+
+    B7 -- V --> B8["8<br/>Lançar IllegalArgumentException"]
+    B7 -- F --> 9
+
+```
+\
+Valor da diária:
+```mermaid
+flowchart TD
+    B9{"9<br/>categoria == ECONOMICO?"}
+    B9 -- V --> B10["10<br/>valorDiaria = 120,00"]
+    B9 -- F --> B11{"11<br/>categoria == INTERMEDIARIO?"}
+
+    B11 -- V --> B12["12<br/>valorDiaria = 180,00"]
+    B11 -- F --> B13["13<br/>valorDiaria = 280,00"]
+
+    B10 --> 14
+    B12 --> 14
+    B13 --> 14
+```
+\
+Desconto por duração:
+```mermaid
+flowchart TD
+    B14{"14<br/>numeroDiarias <= 2?"}
+    B14 -- V --> B15["15<br/>taxaDescontoDuracao = 0"]
+    B14 -- F --> B16{"16<br/>numeroDiarias <= 6?"}
+
+    B16 -- V --> B17["17<br/>taxaDescontoDuracao = 0,05"]
+    B16 -- F --> B18{"18<br/>numeroDiarias <= 14?"}
+
+    B18 -- V --> B19["19<br/>taxaDescontoDuracao = 0,10"]
+    B18 -- F --> B20["20<br/>taxaDescontoDuracao = 0,15"]
+
+    B15 --> 21
+    B17 --> 21
+    B19 --> 21
+    B20 --> 21
+```
+\
+Desconto por fidelidade:
+```mermaid
+flowchart TD
+    B21["21<br/>Calcular valorBrutoDiarias,<br/>descontoDuracao e<br/>valorDiariasComDesconto"]
+    B21 --> B22
+
+    B22{"22<br/>nivelCliente == PRATA E<br/>numeroDiarias >= 7 E<br/>!possuiAtrasoAnterior?"}
+    B22 -- V --> B23["23<br/>taxaDescontoFidelidade = 0,05"]
+    B22 -- F --> B24{"24<br/>nivelCliente == OURO E<br/>numeroDiarias >= 5 E<br/>!possuiAtrasoAnterior?"}
+
+    B24 -- V --> B25["25<br/>taxaDescontoFidelidade = 0,10"]
+    B24 -- F --> B26["26<br/>taxaDescontoFidelidade = 0"]
+
+    B23 --> 27
+    B25 --> 27
+    B26 --> 27
+```
+\
+Custo da quilometragem:
+```mermaid
+flowchart TD
+    B27["27<br/>Calcular descontoFidelidade,<br/>valorFinalDiarias,<br/>franquiaQuilometros e<br/>quilometrosExcedentes"]
+    B27 --> B28
+
+    B28{"28<br/>quilometrosExcedentes <= 0?"}
+    B28 -- V --> B29["29<br/>custoQuilometragem = 0"]
+    B28 -- F --> B30{"30<br/>quilometrosExcedentes <= 100?"}
+
+    B30 -- V --> B31["31<br/>tarifaQuilometrica = 0,80"]
+    B30 -- F --> B32{"32<br/>quilometrosExcedentes <= 300?"}
+
+    B32 -- V --> B33["33<br/>tarifaQuilometrica = 1,00"]
+    B32 -- F --> B34["34<br/>tarifaQuilometrica = 1,50"]
+
+    B31 --> 35
+    B33 --> 35
+    B34 --> 35
+```
+\
+Custo do seguro:
+```mermaid
+flowchart TD
+    B35["35<br/>custoQuilometragem =<br/>quilometrosExcedentes × tarifaQuilometrica"]
+
+    29 --> B36
+    B35 --> B36
+
+    B36{"36<br/>seguro == SEM_SEGURO?"}
+    B36 -- V --> B37["37<br/>valorSeguroDiaria = 0"]
+    B36 -- F --> B38{"38<br/>seguro == BASICO?"}
+
+    B38 -- V --> B39["39<br/>valorSeguroDiaria = 25,00"]
+    B38 -- F --> B40["40<br/>valorSeguroDiaria = 45,00"]
+
+    B37 --> 41
+    B39 --> 41
+    B40 --> 41
+```
+\
+Custo do atraso:
+```mermaid
+flowchart TD
+    B41["41<br/>custoSeguro =<br/>valorSeguroDiaria × numeroDiarias"]
+    B41 --> B42
+
+    B42{"42<br/>horasAtraso <= 1?"}
+    B42 -- V --> B43["43<br/>custoAtraso = 0"]
+    B42 -- F --> B44{"44<br/>horasAtraso <= 3?"}
+
+    B44 -- V --> B45["45<br/>custoAtraso =<br/>valorDiaria × 0,20 × horasAtraso"]
+    B44 -- F --> B46["46<br/>custoAtraso = valorDiaria"]
+
+    B47["47<br/>total = valorFinalDiarias +<br/>custoQuilometragem +<br/>custoSeguro + custoAtraso<br/><br/>Retornar total.setScale<br/>(2, RoundingMode.HALF_UP)"]
+    B43 --> B47
+    B45 --> B47
+    B46 --> B47
+
+    B47 --> OUT([Saída])
+```
 
 ### Identificação dos nós e das arestas
 
