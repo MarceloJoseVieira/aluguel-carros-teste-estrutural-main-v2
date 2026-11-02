@@ -380,41 +380,75 @@ Classe: `McdcTest.java`. Registre os resultados de sua execução isolada.
 
 ### Decisão 1
 
-- Expressão e localização no código: A preencher.
-- Condição A: A preencher.
-- Condição B: A preencher.
-- Condição C: A preencher.
+- Expressão e localização no código: linha 68 de `CalculadoraCustoLocacao.java`.
+- Condição A: nivelCliente == NivelCliente.PRATA.
+- Condição B: numeroDiarias >= 7.
+- Condição C: !possuiAtrasoAnterior.
 
 | Caso / entradas | A (valor lógico) | B (valor lógico) | C (valor lógico) | Condições efetivamente avaliadas | Resultado da decisão | Resultado esperado do método | Teste JUnit / invocação |
 |---|---|---|---|---|---|---|---|
-| A preencher | A preencher | A preencher | A preencher | A preencher | A preencher | A preencher | A preencher |
+| PRATA-BASE: ECONOMICO, PRATA, 7, 0, 0, SEM_SEGURO, false | V | V | V | A, B e C | V | 718,20 | deveAtenderMcdcDaDecisaoPrata |
+| PRATA-A: ECONOMICO, COMUM, 7, 0, 0, SEM_SEGURO, false | F | V | V | A | F | 756,00 | deveAtenderMcdcDaDecisaoPrata |
+| PRATA-B: ECONOMICO, PRATA, 6, 0, 0, SEM_SEGURO, false | V | F | V | A e B | F | 684,00 | deveAtenderMcdcDaDecisaoPrata |
+| PRATA-C: ECONOMICO, PRATA, 7, 0, 0, SEM_SEGURO, true | V | V | F | A, B e C | F | 756,00 | deveAtenderMcdcDaDecisaoPrata |
 
 | Condição | Par de casos | Demonstração da influência independente |
 |---|---|---|
-| A | A preencher | A preencher |
-| B | A preencher | A preencher |
-| C | A preencher | A preencher |
+| A | PRATA-BASE × PRATA-A | B e C permanecem verdadeiras. A muda de V para F e a decisão muda de V para F. |
+| B | PRATA-BASE × PRATA-B | A e C permanecem verdadeiras. B muda de V para F e a decisão muda de V para F. |
+| C | PRATA-BASE × PRATA-C | A e B permanecem verdadeiras. C muda de V para F e a decisão muda de V para F. |
 
-Justificativa de alcance da decisão, curto-circuito e atendimento ao MC/DC de causa única: A preencher.
+Justificativa de alcance da decisão, curto-circuito e atendimento ao MC/DC de causa única:
+
+O caso PRATA-BASE é V porque o cliente é PRATA,
+possui pelo menos sete diárias e não possui atraso anterior.
+No caso PRATA-A, somente A assume valor F. Como o operador utilizado
+é &&, a avaliação é interrompida após A e B e C não são
+avaliadas durante a execução.\
+No caso PRATA-B, A é V e B é F. Por isso, C não é avaliada devido ao curto-circuito.\
+No caso PRATA-C, as três condições são avaliadas, mas C é F porque
+existe atraso anterior.\
+Os pares PRATA-BASE × PRATA-A, PRATA-BASE × PRATA-B e
+PRATA-BASE × PRATA-C demonstram que cada condição pode alterar
+independentemente o resultado da decisão.\
+Portanto, a decisão PRATA atende
+ao MC/DC de causa única.
 
 ### Decisão 2
 
-- Expressão e localização no código: A preencher.
-- Condição A: A preencher.
-- Condição B: A preencher.
-- Condição C: A preencher.
+- Expressão e localização no código: linha 72 de CalculadoraCustoLocacao.java.
+- Condição A: nivelCliente == NivelCliente.OURO.
+- Condição B: numeroDiarias >= 5.
+- Condição C: !possuiAtrasoAnterior.
 
 | Caso / entradas | A (valor lógico) | B (valor lógico) | C (valor lógico) | Condições efetivamente avaliadas | Resultado da decisão | Resultado esperado do método | Teste JUnit / invocação |
 |---|---|---|---|---|---|---|---|
-| A preencher | A preencher | A preencher | A preencher | A preencher | A preencher | A preencher | A preencher |
+| OURO-BASE: ECONOMICO, OURO, 5, 0, 0, SEM_SEGURO, false |  V |  V |  V | A, B e C | V | R$ 513,00 | deveAtenderMcdcDaDecisaoOuro |
+| OURO-A: ECONOMICO, COMUM, 5, 0, 0, SEM_SEGURO, false   |  F |  V |  V | A | F | R$ 570,00 | deveAtenderMcdcDaDecisaoOuro |
+| OURO-B: ECONOMICO, OURO, 4, 0, 0, SEM_SEGURO, false    |  V |  F |  V | A e B | F | R$ 456,00 | deveAtenderMcdcDaDecisaoOuro |
+| OURO-C: ECONOMICO, OURO, 5, 0, 0, SEM_SEGURO, true     |  V |  V |  F | A, B e C | F | R$ 570,00 | deveAtenderMcdcDaDecisaoOuro |
 
 | Condição | Par de casos | Demonstração da influência independente |
 |---|---|---|
-| A | A preencher | A preencher |
-| B | A preencher | A preencher |
-| C | A preencher | A preencher |
+| A | OURO-BASE × OURO-A | B e C permanecem verdadeiras. A muda de V para F e a decisão muda de V para F. |
+| B | OURO-BASE × OURO-B | A e C permanecem verdadeiras. B muda de V para F e a decisão muda de V para F. |
+| C | OURO-BASE × OURO-C | A e B permanecem verdadeiras. C muda de V para F e a decisão muda de V para F. |
 
-Justificativa de alcance da decisão, curto-circuito e atendimento ao MC/DC de causa única: A preencher.
+Justificativa de alcance da decisão, curto-circuito e atendimento ao MC/DC de causa única:\
+A decisão OURO é alcançada nos casos em que a decisão PRATA anterior é
+F.\
+No caso OURO-BASE, o cliente é OURO, possui pelo menos cinco
+diárias e não possui atraso anterior. Portanto, as três condições são
+verdadeiras e o desconto de 10% é aplicado.\
+No caso OURO-A, A é F porque o cliente é COMUM. Assim, B e C não são
+avaliadas pela expressão OURO.\
+No caso OURO-B, A é verdadeira e B é falsa porque há somente quatro
+diárias. Dessa forma, C não é avaliada.\
+No caso OURO-C, A e B são verdadeiras, mas C é falsa devido à existência
+de atraso anterior. As três condições são avaliadas.\
+Os pares OURO-BASE × OURO-A, OURO-BASE × OURO-B e
+OURO-BASE × OURO-C demonstram a influência independente de A, B e C.
+Portanto, a decisão OURO atende ao MC/DC de causa única.
 
 ## 5.4. Teste de mutação com PIT
 
