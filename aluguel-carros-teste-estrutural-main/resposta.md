@@ -6,12 +6,12 @@
 
 | Integrante | Nome completo | Matrícula |
 |---|---|---|
-| Aluno(a) 1 | A preencher | A preencher |
-| Aluno(a) 2 (se houver) | A preencher | A preencher |
+| Aluno(a) 1 | Marcelo José Vieira da Silva | 20210052017 |
+| Aluno(a) 2 | Matheus Rodrigues do Rego | 20220005440 |
 
-- Turma: A preencher.
-- Data: A preencher.
-- `artifactId`: A preencher.
+- Turma: DIM0507 - TESTE DE SOFTWARE - T01.
+- Data: 3/11/2026.
+- `artifactId`: MarceloVieira_MatheusRodrigues.
 
 ## 5.1. Cobertura de arestas
 
