@@ -15,7 +15,7 @@ class McdcTest
     @CsvSource({"1, 120.00", "2, 240.00"})
     void deveCalcularLocacaoBasica(int numeroDiarias, BigDecimal valorEsperado)
     {
-        BigDecimal resultado = calculadora.calcularCustoLocacao(
+        BigDecimal resultado = calcular(
             CategoriaVeiculo.ECONOMICO,
             NivelCliente.COMUM,
             numeroDiarias,
@@ -46,7 +46,7 @@ class McdcTest
         boolean possuiAtrasoAnterior,
         BigDecimal valorEsperado)
     {
-        BigDecimal resultado = calculadora.calcularCustoLocacao(
+        BigDecimal resultado = calcular(
             categoria,
             nivelCliente,
             numeroDiarias,
@@ -77,7 +77,7 @@ class McdcTest
         boolean possuiAtrasoAnterior,
         BigDecimal valorEsperado)
     {
-        BigDecimal resultado = calculadora.calcularCustoLocacao(
+        BigDecimal resultado = calcular(
             categoria,
             nivelCliente,
             numeroDiarias,
@@ -90,4 +90,23 @@ class McdcTest
         assertThat(resultado).as("Resultado incorreto no caso %s", caso).isEqualByComparingTo(valorEsperado);
     }
 
+    private BigDecimal calcular(
+            CategoriaVeiculo categoria,
+            NivelCliente nivelCliente,
+            int numeroDiarias,
+            int quilometrosRodados,
+            int horasAtraso,
+            TipoSeguro seguro,
+            boolean possuiAtrasoAnterior)
+    {
+        return calculadora.calcularCustoLocacao(
+                categoria,
+                nivelCliente,
+                numeroDiarias,
+                quilometrosRodados,
+                horasAtraso,
+                seguro,
+                possuiAtrasoAnterior
+        );
+    }
 }

@@ -598,11 +598,15 @@ Escopo: suíte completa das três classes de teste.
 
 ### Configuração e abrangência
 
-- Versão/commit e adaptações utilizadas: A preencher.
-- Comando executado, requisitos e limiares: A preencher.
-- Quantidade e identificação dos arquivos e métodos esperados: A preencher.
-- Quantidade e identificação dos arquivos e métodos analisados: A preencher.
-- Conferência de reconhecimento dos recursos JUnit utilizados: A preencher.
+- Versão/commit e adaptações utilizadas: e89ce1a28d56db314d159e8957591aef6002173d.
+- Comando executado, requisitos e limiares: junit5-magic-zero-v1.
+- Quantidade e identificação dos arquivos e métodos esperados: 3 arquivos e 19 métodos de teste, conforme a suíte entregue:
+  - `CoberturaArestasTest.java` (9 métodos): `deveCalcularLocacaoBasica`, `deveCobrirCasosAdicionaisDeSucesso`, `deveLancarExcecaoQuandoCategoriaForNula`, `deveLancarExcecaoQuandoNivelClienteForNulo`, `deveLancarExcecaoQuandoSeguroForNulo`, `deveLancarExcecaoQuandoNumeroDeDiariasForInvalido`, `deveLancarExcecaoQuandoQuilometragemForNegativa`, `deveLancarExcecaoQuandoHorasDeAtrasoForemNegativas`, `devePriorizarNuloQuandoTambemHouverDiariasInvalidas`;
+  - `CaminhosBasicosTest.java` (7 métodos): `deveExecutarCaminhoDeSucesso`, `caminhoP2DeveLancarExcecaoQuandoCategoriaForNula`, `caminhoP3DeveLancarExcecaoQuandoNivelClienteForNulo`, `caminhoP4DeveLancarExcecaoQuandoSeguroForNulo`, `caminhoP5DeveLancarExcecaoQuandoNumeroDeDiariasForInvalido`, `caminhoP6DeveLancarExcecaoQuandoQuilometragemForNegativa`, `caminhoP7DeveLancarExcecaoQuandoHorasDeAtrasoForemNegativas`;
+  - `McdcTest.java` (3 métodos): `deveCalcularLocacaoBasica`, `deveAtenderMcdcDaDecisaoPrata`, `deveAtenderMcdcDaDecisaoOuro`.
+
+- Quantidade e identificação dos arquivos e métodos analisados:  3 arquivos e 19 métodos, os mesmos relacionados acima. O `summary.json` registra `"arquivos": 3`, `"metodos": 19` e `"metodos_por_classe"` com `CaminhosBasicosTest = 7`, `CoberturaArestasTest = 9` e `McdcTest = 3`. O `input.csv` contém 3 linhas de arquivos e o `test-smells.csv` contém 3 linhas de resultados. O Surefire registrou 69 execuções de teste, pois os métodos parametrizados são executados várias vezes; todas as 69 execuções terminam sem falhas, erros ou testes ignorados.
+- Conferência de reconhecimento dos recursos JUnit utilizados: foram reconhecidos 13 métodos anotados com `@Test` e 6 com `@ParameterizedTest`, totalizando os 19 métodos distintos. Os provedores `@CsvSource` e `@MethodSource` foram reconhecidos, inclusive nos métodos com nome de exibição customizado (`name = "{0}"`). Não há uso de `@RepeatedTest`, `@Disabled` ou teste ignorado. A contagem por classe do tsDetect coincide com a quantidade de métodos distintos registrada pelo Surefire (`CoberturaArestasTest = 9`, `CaminhosBasicosTest = 7`, `McdcTest = 3`), e as asserções utilizadas (`assertThrows`, `assertThat` e `assertEquals`) foram reconhecidas, sem ocorrência de `Unknown Test`.
 
 ### Ocorrências e refatorações
 
@@ -610,11 +614,11 @@ Escopo: suíte completa das três classes de teste.
 
 | Tipo de smell | Ocorrências iniciais | Refatoração realizada, se necessária | Ocorrências finais |
 |---|---|---|---|
-| A preencher | A preencher | A preencher | A preencher |
+| Lazy Test | 5 (2 em CoberturaArestasTest; 3 em McdcTest) | Extração/uso do helper calcular(...), sem alterar asserções ou casos| 0 |
 
-Verificação de preservação das asserções, cobertura, caminhos de McCabe, MC/DC e resultado de mutação após as refatorações: A preencher.
+Verificação de preservação das asserções, cobertura, caminhos de McCabe, MC/DC e resultado de mutação após as refatorações: após a refatoração, a suíte foi integralmente reexecutada e as asserções e os casos de teste foram preservados: 69 execuções, 0 falhas, 0 erros e 0 testes ignorados. A cobertura de arestas permaneceu em 62/62 arestas do grafo (100%) e 48/48 ramos no JaCoCo. O critério de McCabe manteve V(G) = 25, os 25 caminhos independentes e os 25 testes correspondentes, com 78/78 arestas, 48/48 ramos e 53/53 linhas cobertas. O MC/DC das duas decisões (PRATA e OURO) foi preservado com os mesmos pares de independência e os 10 casos da classe `McdcTest`. No PIT, permaneceram 40 mutantes: 39 com status `KILLED` e 1 com status `SURVIVED`, o mutante equivalente da linha 88 já justificado individualmente na seção 5.4; não houve `NO_COVERAGE`. No tsDetect, a reanálise resultou em 0 ocorrências nos 21 detectores.
 
-Evidências do relatório original, resumo de abrangência e logs (links relativos): A preencher.
+Evidências do relatório original, resumo de abrangência e logs (links relativos): Evidências da preservação: [JaCoCo arestas](evidencias/site/jacoco/arestas/jacoco.xml), [JaCoCo caminhos](evidencias/site/jacoco/caminhos/jacoco.xml), [JaCoCo MC/DC](evidencias/site/jacoco/mcdc/jacoco.xml), [PIT mutations.xml](evidencias/pit-reports/mutations.xml), [Surefire suite](evidencias/surefire-reports/suite/) e [tsDetect final](evidencias/tsdetect/final/summary.json).
 
 ## 5.6. Automação e relatório consolidado
 
@@ -622,13 +626,13 @@ Evidências do relatório original, resumo de abrangência e logs (links relativ
 
 | Componente | Versão utilizada |
 |---|---|
-| Java | A preencher |
-| Maven | A preencher |
-| JUnit | A preencher |
-| JaCoCo | A preencher |
-| PIT e plugin JUnit 5 | A preencher |
-| tsDetect e adaptação | A preencher |
-| Python e Git | A preencher |
+| Java | OpenJDK 21.0.11 (Corretto 21.0.11.10.1) |
+| Maven | Apache Maven 3.9.16  |
+| JUnit | JUnit Jupiter 5.11.4 (com AssertJ 3.27.6) |
+| JaCoCo | 0.8.12  |
+| PIT e plugin JUnit 5 | PIT 1.17.3; pitest-junit5-plugin 1.2.1 |
+| tsDetect e adaptação | commit `e89ce1a28d56db314d159e8957591aef6002173d`; adaptação `junit5-magic-zero-v1`; JAR `TestSmellDetector-0.1-jar-with-dependencies.jar` |
+| Python e Git | Python 3.14.4; Git 2.53.0 |
 
 ### Execuções finais
 
@@ -636,37 +640,37 @@ Evidências do relatório original, resumo de abrangência e logs (links relativ
 
 | Análise | Comando e perfil | Data da execução | Resultado Maven | Relatório / log (link relativo) |
 |---|---|---|---|---|
-| JUnit | A preencher | A preencher | A preencher | A preencher |
-| JaCoCo / arestas isoladas | A preencher | A preencher | A preencher | A preencher |
-| JaCoCo / caminhos isolados | A preencher | A preencher | A preencher | A preencher |
-| JaCoCo / MC/DC isolado | A preencher | A preencher | A preencher | A preencher |
-| PIT | A preencher | A preencher | A preencher | A preencher |
-| tsDetect | A preencher | A preencher | A preencher | A preencher |
+| JUnit |`mvn test` (perfil padrão; `test.group=suite`, `tests.include=**/*Test.java`) | 03/11/2026 | BUILD SUCCESS; 69 testes, 0 falhas, 0 erros, 0 ignorados | [Relatórios Surefire](evidencias/surefire-reports/suite/); [log JUnit](evidencias/surefire-reports/suite/junit.log)  |
+| JaCoCo / arestas isoladas |  `mvn -Pjacoco,arestas clean verify` | 03/11/2026 | BUILD SUCCESS; 34 execuções; 62/62 arestas (100%); 48/48 ramos | [HTML](evidencias/site/jacoco/arestas/index.html); [XML](evidencias/site/jacoco/arestas/jacoco.xml); [log](evidencias/site/jacoco/arestas/log/arestas.log) |
+| JaCoCo / caminhos isolados | `mvn -Pjacoco,caminhos verify` | 03/11/2026 | BUILD SUCCESS; 25 execuções; V(G) = 25; 48/48 ramos | [HTML](evidencias/site/jacoco/caminhos/index.html); [XML](evidencias/site/jacoco/caminhos/jacoco.xml); [log](evidencias/site/jacoco/caminhos/log/caminhos.log) |
+| JaCoCo / MC/DC isolado |  `mvn -Pjacoco,mcdc verify` | 03/11/2026 | BUILD SUCCESS; 10 execuções; duas decisões MC/DC | [HTML](evidencias/site/jacoco/mcdc/index.html); [XML](evidencias/site/jacoco/mcdc/jacoco.xml); [log](evidencias/site/jacoco/mcdc/log/mcdc.log) |
+| PIT | `mvn -Ppitest -Dpit.threshold=0 -Dquality.skip=true verify` | 03/11/2026 | BUILD SUCCESS na execução diagnóstica; 40 mutantes: 39 `KILLED` e 1 `SURVIVED` | [HTML](evidencias/pit-reports/index.html); [XML](evidencias/pit-reports/mutations.xml); [log](evidencias/pit-reports/log/pitest.log) |
+| tsDetect | `mvn -Ptsdetect verify` | 03/11/2026 | BUILD SUCCESS; 3 arquivos, 19 métodos, 0 ocorrências | [Resumo](evidencias/tsdetect/final/summary.json); [CSV](evidencias/tsdetect/final/test-smells.csv); [log](evidencias/tsdetect/final/tsdetect.log); [evidência inicial](evidencias/tsdetect/initial/summary.json) |
 
-- Testes executados: A preencher.
-- Falhas: A preencher.
-- Erros: A preencher.
-- Testes ignorados: A preencher.
-- Alterações na automação ou opções de execução, se houver: A preencher.
+- Testes executados: 69.
+- Falhas: 0.
+- Erros: 0.
+- Testes ignorados: 0.
+- Alterações na automação ou opções de execução, se houver: não houve alteração no `pom.xml`, nos scripts de apoio, nos limiares ou nos detectores do tsDetect. A refatoração dos testes está documentada na seção 5.5. A única opção não padrão foi a execução diagnóstica do PIT com `-Dpit.threshold=0 -Dquality.skip=true`, necessária para gerar o relatório com o mutante equivalente da linha 88, já justificado individualmente na seção 5.4. Fora isso, os comandos são os documentados no `README.md`.
 - Identificação da versão final analisada (commit, se disponível): A preencher.
 
 ### Conclusão por requisito
 
 | Requisito | Resultado alcançado | Evidência / seção | Limitações ou justificativas |
 |---|---|---|---|
-| 100% de cobertura de arestas | A preencher | A preencher | A preencher |
-| Caminhos básicos de McCabe | A preencher | A preencher | A preencher |
-| MC/DC nas duas decisões | A preencher | A preencher | A preencher |
-| Todos os mutantes mortos ou impossibilidades justificadas | A preencher | A preencher | A preencher |
-| Zero ocorrências no tsDetect | A preencher | A preencher | A preencher |
-| Execução reproduzível pelo Maven | A preencher | A preencher | A preencher |
+| 100% de cobertura de arestas | Atendido: 62/62 arestas do grafo (100%) e 48/48 ramos no JaCoCo | Seção 5.1; [JaCoCo arestas](evidencias/site/jacoco/arestas/index.html) | Nenhuma  |
+| Caminhos básicos de McCabe | Atendido: V(G) = 25; 25 caminhos independentes; 25 testes; 78/78 arestas | Seção 5.2; [JaCoCo caminhos](evidencias/site/jacoco/caminhos/index.html) | Nenhuma |
+| MC/DC nas duas decisões | Atendido: decisões PRATA e OURO com pares de independência; 10 casos em `McdcTest` | Seção 5.3; [JaCoCo MC/DC](evidencias/site/jacoco/mcdc/index.html) | Nenhuma |
+| Todos os mutantes mortos ou impossibilidades justificadas |  39/40 mutantes `KILLED` (97,5%); 1 `SURVIVED` equivalente justificado; 0 `NO_COVERAGE` | Seção 5.4; [PIT](evidencias/pit-reports/index.html) | 1 mutante equivalente na linha 88; exceção justificada individualmente na seção 5.4 |
+| Zero ocorrências no tsDetect |  Atendido: 3 arquivos, 19 métodos e 0 ocorrências nos 21 detectores | Seção 5.5; [resumo final](evidencias/tsdetect/final/summary.json) | Resultado válido para os detectores e limiares utilizados; não representa ausência absoluta de qualquer problema de qualidade |
+| Execução reproduzível pelo Maven | Atendido: perfis `jacoco,arestas`, `jacoco,caminhos`, `jacoco,mcdc`, `pitest` e `tsdetect`, com comandos no `README.md` | `README.md`; seção 5.6 | A primeira execução do tsDetect exige internet para baixar e compilar o commit fixo; o PIT usa execução diagnóstica por causa do mutante equivalente |
 
 ## 6. Conferência da entrega
 
 - [ ] Integrantes e `artifactId` identificados.
 - [ ] Todas as respostas preenchidas neste arquivo.
-- [ ] Código de produção fornecido preservado.
-- [ ] Código dos testes nas três classes exigidas em `src/test/java`, com cada critério demonstrado isoladamente.
+- [X] Código de produção fornecido preservado.
+- [X] Código dos testes nas três classes exigidas em `src/test/java`, com cada critério demonstrado isoladamente.
 - [ ] Instruções do README conferidas e atualizadas, se necessário.
 - [ ] Relatórios e logs da versão final copiados para `evidencias/` e referenciados neste arquivo.
 - [ ] Recursos necessários à abertura dos relatórios HTML preservados.

@@ -1,0 +1,34 @@
+{
+  "commit": "e89ce1a28d56db314d159e8957591aef6002173d",
+  "adaptacao": "junit5-magic-zero-v1",
+  "arquivos": 3,
+  "metodos": 19,
+  "metodos_por_classe": {
+    "br.com.aluguelcarros.CaminhosBasicosTest": 7,
+    "br.com.aluguelcarros.CoberturaArestasTest": 9,
+    "br.com.aluguelcarros.McdcTest": 3
+  },
+  "ocorrencias": {
+    "Assertion Roulette": 0,
+    "Conditional Test Logic": 0,
+    "Constructor Initialization": 0,
+    "Default Test": 0,
+    "EmptyTest": 0,
+    "Exception Catching Throwing": 0,
+    "General Fixture": 0,
+    "Mystery Guest": 0,
+    "Print Statement": 0,
+    "Redundant Assertion": 0,
+    "Sensitive Equality": 0,
+    "Verbose Test": 0,
+    "Sleepy Test": 0,
+    "Eager Test": 0,
+    "Lazy Test": 5,
+    "Duplicate Assert": 0,
+    "Unknown Test": 0,
+    "IgnoredTest": 0,
+    "Resource Optimism": 0,
+    "Magic Number Test": 0,
+    "Dependent Test": 0
+  }
+}

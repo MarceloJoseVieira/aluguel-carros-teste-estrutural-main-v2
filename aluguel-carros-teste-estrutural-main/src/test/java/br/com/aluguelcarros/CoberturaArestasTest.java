@@ -22,7 +22,7 @@ class CoberturaArestasTest
     @CsvSource({"1, 120.00", "2, 240.00"})
     void deveCalcularLocacaoBasica(int numeroDiarias, BigDecimal valorEsperado)
     {
-        BigDecimal resultado = calculadora.calcularCustoLocacao(
+        BigDecimal resultado = calcular(
             CategoriaVeiculo.ECONOMICO,
             NivelCliente.COMUM,
             numeroDiarias,
@@ -121,7 +121,7 @@ class CoberturaArestasTest
             boolean possuiAtrasoAnterior,
             String valorEsperado)
     {
-        BigDecimal resultado = calculadora.calcularCustoLocacao(
+        BigDecimal resultado = calcular(
                 categoria,
                 nivelCliente,
                 numeroDiarias,
