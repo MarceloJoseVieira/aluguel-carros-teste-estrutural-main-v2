@@ -52,6 +52,9 @@ class CoberturaArestasTest
             Arguments.of("D3", CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 15, 0, 0,
                     TipoSeguro.SEM_SEGURO, false, "1530.00"),
 
+            Arguments.of("D4", CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 14, 0, 0,
+                    TipoSeguro.SEM_SEGURO, false, "1512.00"),
+
             // Fidelidade PRATA
             Arguments.of("P1", CategoriaVeiculo.ECONOMICO, NivelCliente.PRATA, 7, 0, 0,
                     TipoSeguro.SEM_SEGURO, false, "718.20"),
@@ -82,7 +85,11 @@ class CoberturaArestasTest
             Arguments.of("K4", CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 1, 500, 0,
                     TipoSeguro.SEM_SEGURO, false, "720.00"),
 
-            // Seguro
+            Arguments.of("K5", CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 2, 300, 0,
+                    TipoSeguro.SEM_SEGURO, false, "320.00"),
+
+
+                // Seguro
             Arguments.of("S1", CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 1, 0, 0,
                     TipoSeguro.BASICO, false, "145.00"),
             Arguments.of("S2", CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 1, 0, 0,
@@ -94,7 +101,10 @@ class CoberturaArestasTest
             Arguments.of("A2", CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 1, 0, 2,
                     TipoSeguro.SEM_SEGURO, false, "168.00"),
             Arguments.of("A3", CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 1, 0, 4,
-                    TipoSeguro.SEM_SEGURO, false, "240.00")
+                    TipoSeguro.SEM_SEGURO, false, "240.00"),
+
+            Arguments.of("A4", CategoriaVeiculo.ECONOMICO, NivelCliente.COMUM, 1, 0, 3,
+                    TipoSeguro.SEM_SEGURO, false, "192.00")
         );
     }
 

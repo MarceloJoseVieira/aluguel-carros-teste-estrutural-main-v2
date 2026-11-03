@@ -337,7 +337,11 @@ Na execução pelo JaCoCo, foram registrados 48 ramos cobertos
 e nenhum ramo não coberto na classe analisada, correspondendo a 100% de
 cobertura de ramos.
 
-Evidências HTML, XML e log (links relativos): A preencher.
+Evidências HTML, XML e log (links relativos):\
+[Relátorio HTML Cobertura de Arestas](evidencias/site/jacoco/arestas/index.html)\
+[Relátorio XML Cobertura de Arestas](evidencias/site/jacoco/arestas/jacoco.xml)\
+[Log de execução Cobertura de Arestas](evidencias/site/jacoco/arestas/log/arestas.log)
+
 
 ## 5.2. Critério de McCabe
 
@@ -446,11 +450,11 @@ a decisão OURO é viável e independente.
 |Linhas cobertas no JaCoCo|	53 de 53|
 |Complexidade do método no JaCoCo|	25|
 
-Evidências:
-- evidencias/surefire/caminhos/br.com.aluguelcarros.CaminhosBasicosTest.txt
-- evidencias/jacoco/caminhos/index.html
-- evidencias/jacoco/caminhos/jacoco.xml
-- evidencias/logs/caminhos.log
+Evidências:\
+[Relátorio HTML do McCABE](evidencias/site/jacoco/caminhos/index.html)\
+[Relátorio XML do McCABE](evidencias/site/jacoco/caminhos/jacoco.xml)\
+[Log de execução do McCABE](evidencias/site/jacoco/caminhos/log/caminhos.log)
+
 
 
 ## 5.3. MC/DC em duas decisões
@@ -532,33 +536,61 @@ Portanto, a decisão OURO atende ao MC/DC de causa única.
 ## 5.4. Teste de mutação com PIT
 
 Escopo: suíte completa das três classes de teste.
+- `CoberturaArestasTest`;
+- `CaminhosBasicosTest`;
+- `McdcTest`.
 
 ### Configuração e resultados
 
-- Escopo e operadores utilizados: A preencher.
-- Comando executado e resultado da execução Maven: A preencher.
-- Total de mutantes: A preencher.
-- Percentual de mutantes com status `KILLED`: A preencher.
+- Escopo e operadores utilizados: `br.com.aluguelcarros.CalculadoraCustoLocacao`.
+- Comando executado e resultado da execução Maven: `mvn -Ppitest verify`.
+- Total de mutantes: 40.
+- Percentual de mutantes com status `KILLED`: 98%.
 
 | Status no PIT | Quantidade |
 |---|---|
-| A preencher | A preencher |
+| KILLED | 39 |
+| SURVIVED | 1 |
+| NO_COVERAGE | 0 |
+| TIMED_OUT | 0 |
+| NON_VIABLE | 0 |
+| MEMORY_ERROR | 0 |
+| NOT_STARTED | 0 |
+| STARTED | 0 |
+| RUN_ERROR | 0 |
+| **Total** | **40** |
 
-Testes acrescentados ou aprimorados após a análise: A preencher.
+### Testes acrescentados ou aprimorados após a análise:
+Foram adicionados três casos de fronteira em `CoberturaArestasTest.java`:\
+`D4`, com 14 diárias e resultado esperado de `R$ 1.512,00`, para a condição
+`numeroDiarias <= 14`;\
+`K5`, com 2 diárias e 300 km, com resultado esperado de `R$ 320,00`, para validar a franquia calculada por
+`100L * numeroDiarias`;\
+`A4`, com 3 horas de atraso e resultado esperado de `R$ 192,00`, para a condição `horasAtraso <= 3`. Os três casos mataram
+três mutantes que haviam sobrevivido na execução inicial.\
+O mutante restante, na linha 88, foi documentado individualmente como possível
+mutante equivalente.
 
-Evidências HTML, XML e log (links relativos): A preencher.
+Evidências HTML, XML e log (links relativos):\
+[Relátorio HTML do PIT](evidencias/pit-reports/index.html)\
+[Relátorio XML do PIT](evidencias/pit-reports/mutations.xml)\
+[Log da execução do PIT](evidencias/pit-reports/log/pitest.log)
 
 ### Análise individual de mutantes não mortos
 
 <!-- Repita os campos abaixo para cada mutante não morto. Se todos foram mortos, registre esse resultado e a evidência correspondente. -->
 
-- Identificação, linha e operador: A preencher.
-- Alteração realizada pelo mutante: A preencher.
-- Status no PIT: A preencher.
-- Tentativas de teste e resultados: A preencher.
-- Justificativa técnica da impossibilidade, quando aplicável: A preencher.
-- Demonstração de equivalência para todo o domínio previsto, quando alegada: A preencher.
-- Eventual flexibilização do bloqueio Maven e justificativa: A preencher.
+- Identificação, linha e operador:\
+  Mutante localizado na classe `br.com.aluguelcarros.CalculadoraCustoLocacao`, método
+  `calcularCustoLocacao`, linha 88, utilizando o operador
+  `ConditionalsBoundaryMutator`.
+- Alteração realizada pelo mutante: alteração da fronteira da condição.
+- Status no PIT: SURVIVED.
+- Tentativas de teste e resultados: ---
+- Justificativa técnica da impossibilidade, quando aplicável: Quando quilometrosExcedentes é negativo, o código não cobra quilometragem. Quando o excedente é igual a zero, o
+  código atribui diretamente BigDecimal.ZERO.
+- Demonstração de equivalência para todo o domínio previsto, quando alegada: ---
+- Eventual flexibilização do bloqueio Maven e justificativa: ---
 
 ## 5.5. Test smells com tsDetect
 
