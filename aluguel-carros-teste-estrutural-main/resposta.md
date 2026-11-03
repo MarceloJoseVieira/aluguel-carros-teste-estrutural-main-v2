@@ -669,8 +669,8 @@ Evidências do relatório original, resumo de abrangência e logs (links relativ
 
 - [ ] Integrantes e `artifactId` identificados.
 - [ ] Todas as respostas preenchidas neste arquivo.
-- [X] Código de produção fornecido preservado.
-- [X] Código dos testes nas três classes exigidas em `src/test/java`, com cada critério demonstrado isoladamente.
+- [ ] Código de produção fornecido preservado.
+- [ ] Código dos testes nas três classes exigidas em `src/test/java`, com cada critério demonstrado isoladamente.
 - [ ] Instruções do README conferidas e atualizadas, se necessário.
 - [ ] Relatórios e logs da versão final copiados para `evidencias/` e referenciados neste arquivo.
 - [ ] Recursos necessários à abertura dos relatórios HTML preservados.
